@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Web Portal</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f5f9;
+        }
+
+        #header {
+            background-color: #3498db;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px;
+        }
+
+        .section {
+            width: 23%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .doctor-details {
+            margin-bottom: 20px;
+        }
+
+        .doctor-details h3 {
+            margin-top: 0;
+        }
+
+        .doctor-details p {
+            margin: 5px 0;
+        }
+
+        .patient-details {
+            margin-bottom: 20px;
+        }
+
+        .patient-details label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .patient-details input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .visit-details {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+
+        .visit-details p {
+            margin: 5px 0;
+        }
+
+        .attendance {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .attendance button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>Doctor Web Portal</h1>
+    </div>
+    <div class="container">
+        <!-- Doctors Availability Section -->
+        <div class="section">
+            <h2>Doctors Availability</h2>
+            <!-- Doctor 1 -->
+            <div class="doctor-details">
+                <h3>Dr. John Smith</h3>
+                <p>Specialty: Cardiology</p>
+                <div class="attendance">
+                    <button class="attendance-button">Tap for Attendance</button>
+                    <p class="doctor-status-display absent">Absent</p>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Doctors Availability</h2>
+            <!-- Doctor 2 -->
+            <div class="doctor-details">
+                <h3>Dr. Jane Doe</h3>
+                <p>Specialty: Pediatrics</p>
+                <div class="attendance">
+                    <button class="attendance-button">Tap for Attendance</button>
+                    <p class="doctor-status-display absent">Absent</p>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Doctors Availability</h2>
+            <!-- Doctor 3 -->
+            <div class="doctor-details">
+                <h3>Dr. Michael Johnson</h3>
+                <p>Specialty: Dermatology</p>
+                <div class="attendance">
+                    <button class="attendance-button">Tap for Attendance</button>
+                    <p class="doctor-status-display absent">Absent</p>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Doctors Availability</h2>
+            <!-- Doctor 4 -->
+            <div class="doctor-details">
+                <h3>Dr. Emily Wilson</h3>
+                <p>Specialty: Orthopedics</p>
+                <div class="attendance">
+                    <button class="attendance-button">Tap for Attendance</button>
+                    <p class="doctor-status-display absent">Absent</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Patients Records Section -->
+    <div class="container">
+        <div class="section">
+            <h2>Patients Records</h2>
+            <div class="patient-details">
+                <label for="patient-id">Enter Patient ID:</label>
+                <input type="text" id="patient-id" name="patient-id">
+                <button id="search-button">Search</button>
+            </div>
+            <div id="patient-details" style="display: none;">
+                <div class="record-container">
+                    <h3>Patient Details</h3>
+                    <p><strong>ID:</strong> <span id="patient-id-display"></span></p>
+                    <p><strong>Status:</strong> <span id="patient-status"></span></p>
+                    <p><strong>Treatment:</strong> <span id="patient-treatment"></span></p>
+                    <p><strong>Tablets:</strong> <span id="patient-tablets"></span></p>
+                </div>
+                <div id="visit-details" class="record-container">
+                    <h3>Visit Details</h3>
+                    <div id="visit-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const attendanceButtons = document.querySelectorAll('.attendance-button');
+        attendanceButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const doctorStatusDisplay = this.parentElement.querySelector('.doctor-status-display');
+                if (doctorStatusDisplay.textContent === 'Absent') {
+                    doctorStatusDisplay.textContent = 'Present';
+                    doctorStatusDisplay.classList.remove('absent');
+                    doctorStatusDisplay.classList.add('present');
+                } else {
+                    doctorStatusDisplay.textContent = 'Absent';
+                    doctorStatusDisplay.classList.remove('present');
+                    doctorStatusDisplay.classList.add('absent');
+                }
+            });
+        });
+
+        document.getElementById('search-button').addEventListener('click', function () {
+            var patientId = document.getElementById('patient-id').value;
+            // Here you can fetch patient records using the patientId and update the UI accordingly
+            // For simplicity, I'll just display a mock patient record
+            document.getElementById('patient-id-display').textContent = patientId;
+            document.getElementById('patient-status').textContent = 'In Treatment';
+            document.getElementById('patient-treatment').textContent = 'Under Observation';
+            document.getElementById('patient-tablets').textContent = 'Aspirin, Ibuprofen';
+
+            // Remove previous visit details if any
+            var visitContainer = document.getElementById('visit-container');
+            visitContainer.innerHTML = '';
+
+            // Add example visit details
+            var visitDates = ['2024-04-05', '2024-04-10', '2024-04-15']; // Example visit dates
+            visitDates.forEach(function(date) {
+                var visitDiv = document.createElement('div');
+                visitDiv.classList.add('visit-container');
+                visitDiv.textContent = 'Visited on: ' + date;
+                visitContainer.appendChild(visitDiv);
+            });
+
+            document.getElementById('patient-details').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

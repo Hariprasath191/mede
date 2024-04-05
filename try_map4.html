@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hospital Locations Map</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <label for="search">Search Location:</label>
+        <input type="text" id="search" placeholder="Enter location">
+        <button onclick="searchLocation()">Search</button>
+    </div>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map
+        const map = L.map('map').setView([10.9712, 78.0847], 15);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+            maxZoom: 18,
+        }).addTo(map);
+
+        // Add a marker layer to hold hospital markers
+        const hospitalLayer = L.layerGroup().addTo(map);
+
+        // Function to fetch hospital locations based on bounds
+        function fetchHospitalLocations(bounds) {
+            const southWest = bounds.getSouthWest();
+            const northEast = bounds.getNorthEast();
+
+            const overpassUrl = `https://overpass-api.de/api/interpreter?data=[out:json];node["amenity"="hospital"](${southWest.lat},${southWest.lng},${northEast.lat},${northEast.lng});out;`;
+
+            fetch(overpassUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Clear existing hospital markers
+                    hospitalLayer.clearLayers();
+
+                    // Add new hospital markers
+                    data.elements.forEach(hospital => {
+                        const marker = L.marker([hospital.lat, hospital.lon]).addTo(hospitalLayer);
+                        marker.bindPopup(`<b>${hospital.tags.name || 'Hospital'}</b>`);
+                    });
+                })
+                .catch(error => console.error('Error fetching hospital locations:', error));
+        }
+
+        // Function to search for location entered by the user
+        function searchLocation() {
+            const searchInput = document.getElementById('search').value;
+            if (searchInput) {
+                fetch(`https://nominatim.openstreetmap.org/search?q=${searchInput}&format=json`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.length > 0) {
+                            const { lat, lon } = data[0];
+                            map.setView([lat, lon], 15);
+                        } else {
+                            console.log('Location not found');
+                        }
+                    })
+                    .catch(error => console.error('Error searching location:', error));
+            }
+        }
+
+        // Fetch hospital locations when the map bounds change
+        map.on('moveend', () => {
+            const bounds = map.getBounds();
+            fetchHospitalLocations(bounds);
+        });
+
+        // Initial fetch of hospital locations
+        const initialBounds = map.getBounds();
+        fetchHospitalLocations(initialBounds);
+    </script>
+</body>
+</html>

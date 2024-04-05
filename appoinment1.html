@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Appointment Form</title>
+<style>
+/* General styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Section title */
+.section-title {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.section-title h2 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.section-title img {
+  display: block;
+  margin: 0 auto;
+}
+
+.section-title p {
+  font-size: 18px;
+  color: #666;
+}
+
+/* Form */
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form input,
+.form textarea,
+.form select {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.form input:focus,
+.form textarea:focus,
+.form select:focus {
+  border-color: #007bff;
+}
+
+/* Button */
+.button {
+  text-align: center;
+}
+
+.btn {
+  padding: 15px 30px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+/* Confirm message */
+.confirm-message {
+  font-size: 16px;
+  color: #777;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Appointment Image */
+.appointment-image img {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Booked time slots */
+.booked-slot {
+  background-color: #ff5252; /* Red */
+}
+
+.available-slot {
+  background-color: #52ff52; /* Green */
+}
+</style>
+</head>
+<body>
+
+<!-- Start Appointment -->
+<section class="appointment">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="section-title">
+          <h2>We Are Always Ready to Help You. Book An Appointment</h2>
+          <p>Please enter the details</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-12 col-12">
+        <form class="form" action="#">
+          <div class="row">
+            <!-- Name input -->
+            <div class="col-lg-6 col-md-6 col-12">
+              <div class="form-group">
+                <input name="name" type="text" placeholder="Name">
+              </div>
+            </div>
+            <!-- Email input -->
+            <div class="col-lg-6 col-md-6 col-12">
+              <div class="form-group">
+                <input name="email" type="email" placeholder="Email">
+              </div>
+            </div>
+            <!-- Phone input -->
+            <div class="col-lg-6 col-md-6 col-12">
+              <div class="form-group">
+                <input name="phone" type="text" placeholder="Phone">
+              </div>
+            </div>
+            <!-- Address input -->
+            <div class="col-lg-6 col-md-6 col-12">
+              <div class="form-group">
+                <input name="address" type="text" placeholder="Address">
+              </div>
+            </div>
+            <!-- Date input -->
+            <div class="col-lg-6 col-md-6 col-12">
+              <div class="form-group">
+                <input type="date" placeholder="Date" id="datepicker">
+              </div>
+            </div>
+            <!-- Time input -->
+            <div class="col-lg-6 col-md-6 col-12">
+              <div class="form-group">
+                <select name="time-slot" id="timeSlotSelect">
+                  <option value="" selected disabled>Select Time Slot</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- Message textarea -->
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+              <div class="form-group">
+                <textarea name="message" placeholder="Feel free to discuss here....."></textarea>
+              </div>
+            </div>
+          </div>
+          <!-- Button and confirmation message -->
+          <div class="row">
+            <div class="col-lg-5 col-md-4 col-12">
+              <div class="form-group">
+                <div class="button">
+                  <button type="submit" class="btn">Book An Appointment</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-7 col-md-8 col-12">
+              <p class="confirm-message">( We will confirm by a text message )</p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Appointment -->
+
+<!-- JavaScript for datepicker and generating time slots -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  // Simulated data for booked and available time slots
+  const bookedSlots = ["08:00", "09:00", "10:00"];
+  const availableSlots = ["11:00", "12:00", "13:00", "14:00"];
+
+  // Function to generate options for select dropdown
+  function generateOptions(slots, type) {
+    const select = document.getElementById("timeSlotSelect");
+    slots.forEach(slot => {
+      const option = document.createElement("option");
+      option.value = slot;
+      option.textContent = `${slot} (${type})`;
+      option.classList.add(type === "Booked" ? "booked-slot" : "available-slot");
+      select.appendChild(option);
+    });
+  }
+
+  // Call the function to generate options
+  generateOptions(bookedSlots, "Booked");
+  generateOptions(availableSlots, "Available");
+</script>
+
+</body>
+</html>

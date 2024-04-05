@@ -1,0 +1,133 @@
+<!--DOCTYPE html-->
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--==title========================-->
+        <title>Medical Website HTML</title>
+        <!--==Fav-icon=====================-->
+        <link rel="shortcut icon" href="images/fav-icon.png">
+        <!--==CSS==========================-->
+        <link rel="stylesheet" href="Blood.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <!--==Font-Awesome-for-icons=====-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+        <!-- Link Swiper's CSS -->
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+        />
+    
+    </head>
+    <body>
+        
+        <!--==Hero-Section========================-->
+        <section id="hero">
+    
+            <!--==navigation====================-->
+            <nav class="navigation">
+                <!--**menu-btn*****-->
+                <input type="checkbox" class="menu-btn" id="menu-btn">
+                <label for="menu-btn" class="menu-icon">
+                    <span class="nav-icon"></span>
+                </label>
+                <!--**logo*********-->
+                <a href="index.html" class="logo"><span>BLOOD</span>Donors rate</a>
+                <!--**menu*********-->
+                <ul class="menu">
+                    <li><a href="#Donors Rate">Donors</a></li>
+                    <li><a href="#Patient Rate">patient</a></li>
+                </ul>
+            </nav><!--nav-end-->
+
+    <!--==Content============================-->
+    <div class="hero-content">
+        <!--**text****************-->
+        <div class="hero-text">
+            <h1>Be the reason for someone's heartbeat.</h1>
+            <p>Sharing of life through blood donation' is mostly get motivated by altruism. The blood donation activity aimed at saving an anonymous person's life requires a 
+                'will' that drives the donor to this act of generosity.</p>
+        </div>
+        <!--**img*****************-->
+        <div class="hero-img">
+            <img alt="" src="Blood.jpg">
+        </div>
+    </div>
+
+    
+
+
+<section id="why-choose-us">
+    
+    <!--**left*****************-->
+    <div class="why-choose-us">
+        <h3>Why blood donation is important</h3>
+        <p> 
+            World Blood Donation Day is celebrated to create awareness regarding voluntary blood donation. Individuals who are medically fit and 18 years old can donate blood
+             at the nearest blood bank and help in spreading awareness regarding the same. The worldwide celebration of this day helps to encourage youth to donate blood. Reports 
+             show that India has the highest shortage of blood in the world and falls short of 41 million units of blood every year.  If more people voluntarily donate blood, the
+            Government can reduce these cases of blood shortage. Hence, celebrating World Blood Donation Day is important to ensure every individual who requires blood can get easy
+             access to it.
+        </p>
+        
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+/*-services--*/
+var swiper = new Swiper(".mySwiperservices", {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      700: {
+        slidesPerView: 2,
+        spaceBetween: 40,
+      },
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 50,
+      },
+    },
+  });
+/*--team--*/
+var swiper = new Swiper(".mySwiperteam", {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    breakpoints: {
+      560: {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+      950: {
+        slidesPerView: 3,
+        spaceBetween: 40,
+      },
+      1250: {
+        slidesPerView: 4,
+        spaceBetween: 40,
+      },
+    },
+  });
+/*--testimonials--*/
+  var swiper = new Swiper(".mySwipertesti", {
+    pagination: {
+      el: ".swiper-pagination",
+    },
+  });
+</script>
+
+</body>
+</html>
+
+
